@@ -1,4 +1,5 @@
 function Model() {
+    this.items = [];
     this.listItems = [];
 }
 
@@ -10,13 +11,11 @@ Model.prototype.addData = function(item) {
     this.listItems.push(item);
 };
 
-function View() {
-}
-
 View.prototype.append = function(data) {
     $('.list-todo').keyup(function(event) {
   if (event.keyCode == 13) {
     checkValue();
+    this.addItem(value);
     console.log('shits');
   }
 });
@@ -35,8 +34,13 @@ function checkValue() {
   if ($('.list-todo').val() === "") {
     alert('Please Type an Item ');
   } else {
-    $('.todo-items').append('<li class="item">' + $('.list-todo').val() + '<i id="done" class="fa fa-check" aria-hidden="true"></i>' +'<i id="delete" class="fa fa-trash-o" aria-hidden="true"></i>');
+    $('.todo-items').append('<li class="item">' + 
+        '<i id="delete" class="fa fa-square-o" aria-hidden="true"></i>' + $('.list-todo').val() +
+     '<i id="done" class="fa fa-star-o" aria-hidden="false"></i>');
     resetValue();
+    var display = item.children('.display');
+    var name = display.children('.name');
+    input.val(name.text());
   }
 }
 function resetValue() {
@@ -54,6 +58,7 @@ View.prototype.getItems = function() {
     });
     ajax.done(this.listItems.bind(this));
 };
+
 View.prototype.addItem = function(name) {
     var item = {'.item': name};
     var ajax = $.ajax('/items', {
@@ -64,6 +69,7 @@ View.prototype.addItem = function(name) {
     });
     ajax.done(this.listitems.bind(this));
 };
+
 View.prototype.deleteItem = function(id) {
     var ajax = $.ajax('/items/' + id, {
         type: 'DELETE',
@@ -71,6 +77,7 @@ View.prototype.deleteItem = function(id) {
     });
     ajax.done(this.getItems.bind(this));
 };
+
 View.prototype.editItem = function(id, name) {
     var item = {'.item': name, 'id': id};
     var ajax = $.ajax('/items/' + id, {
@@ -85,6 +92,9 @@ View.prototype.editItem = function(id, name) {
 function Controller(view, model) {
     this.view = view;
     this.model = model;
+}
+
+function View() {
 }
 
 var model = new Model();
