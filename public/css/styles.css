@@ -1,0 +1,193 @@
+body {
+    background-color: black;
+    font-family: tahoma;
+}
+
+.container-layout {
+    width: 1000px;
+    margin: auto;
+}
+
+.video-wrapper {
+    display: inline-block;
+    overflow: hidden;
+    width: 100%;
+    margin-left: 75px;
+    z-index: 3;
+}
+
+video {
+    height: 900px;
+    width: 900px;
+    transform: scale(2.2);
+}
+
+#checkmark {
+    width: 45px;
+}
+
+#todo {
+    font-family: 'Cedarville Cursive', cursive;
+    color: white;
+    font-size: 45px;
+}
+
+.header {
+    font-size: 33px;
+    list-style: none;
+    font-family: sans-serif;
+    z-index: 1;
+    float: right;
+    display: inline-flex;
+    margin-top: -25px;
+    font-weight: 300;
+}
+
+.header li {
+    margin: 50px 0px 0px 0px;
+}
+
+.header li:hover {
+    color: white;
+}
+
+.header li > a {
+    text-decoration: none;
+    color: #09c;
+    margin-left: 30px;
+}
+
+.header li > a:hover {
+    color: white;
+}
+
+.register {
+    position: absolute;
+    font-size: 37px;
+    font-family: sans-serif;
+    color: #09c;
+    cursor: pointer;
+    border: 2px solid;
+    border-radius: 2px;
+    display: block;
+    margin-top: -585px;
+    margin-left: 473px;
+    padding: 25px;
+    text-decoration: none;
+}
+
+.register a {
+    text-decoration: none;
+    color: #09c;
+}
+
+.register:hover {
+    background-color: #09c;
+    color: white;
+}
+
+.light {
+    color: #C7CACD;
+}
+
+.main-todo {
+    color:white;
+    align-items: center;
+}
+
+
+input {
+    border: 0;
+    background-color: #0094c5;
+    padding: 10px;
+    color: white;
+}
+
+div>input {
+    width: 400px;
+    font-size: 15px;
+    background: white;
+    color: grey;
+    border-radius: 15px;
+}
+
+.btn-default {
+    margin-top: 16px;
+    width: 420px;
+    padding: 10px;
+    border-radius: 15px;
+    border: 0;
+    color: white;
+    font-size: 16px;
+    background: #0099cc;
+}
+
+li input {
+    width: 380;
+}
+
+form,
+ul {
+    margin: 0;
+}
+
+.fa-trash-o {
+    color: grey;
+    font-size: 27px;
+}
+
+.fa-star-o {
+    color: #c30f0f;
+    color: grey;
+    font-size: 27px;
+    float: right;
+    margin-right: 10px;
+}
+
+ul {
+    padding-left: 0;
+}
+
+.item {
+    width: 400px;
+    list-style-type: none;
+ background-color: #09c;
+    color: white;
+    margin-top: 4px;
+    padding: 10px;
+    border-radius: 2px;
+}
+
+div.delete {
+    float: right;
+}
+
+.footer {
+    background-color: black;
+    color: white;
+}
+
+.container-body {
+    position: absolute;
+    margin: auto;
+    width: 420px;
+    margin-left: 300px;
+    margin-top: -668px;
+    z-index: 2;
+}
+
+input:focus {
+    background: #fffe8f;
+}
+
+.page-header {
+    text-align: center;
+    font-size: 22px;
+    color: #0099cc;
+    font-weight: 100;
+}
+
+label {
+    color: transparent;
+}
+
