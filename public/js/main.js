@@ -1,72 +1,59 @@
-var TodoList = function(){
-    this.items =[];
-    this.itemList = $('.list-input');
-    this.input = $('#item-input');
-    };      
+function Model() {
+    this.listItems = [];
+}
 
-TodoList.prototype.onAddInputKeydown = function(event){
-  $('.list-input').keyup(function(event) {
-            if (event.keyCode == 13) {
-                checkValue();
-            }
-        });
+Model.prototype.returnData = function() {
+    return this.listItems;
+};
 
+Model.prototype.addData = function(item) {
+    this.listItems.push(item);
+};
 
+function View() {
+}
 
-//       //var ShoppingListApp = function() {};
-//        
-//         //ShoppingListApp.prototype.addItem = function(){
-//         $('.add').click(function() {
-//             if ($('.list-input').val().length) {
-//                 $('.list').append('<li class="item">' + $('.list-input').val()+'<i id="done" class="fa fa-check" aria-hidden="true"></i>' +'<i id="delete" class="fa fa-trash-o" aria-hidden="true"></i>' +'</li>');
-//             resetValue();
-//             } else {
-//                 alert('Please Type An Item');
-//             }
-//         });
-
-//         //ShoppingListApp.prototype.lineThrough = function(){
-//         $('.list').on('click', 'li', function() {
-//             $(this).css('text-decoration', 'line-through');
-//         });
-//         //ShoppingListApp.prototype.removeItem = function(){
-//         $('.list').on('click', '#delete', function() {
-//             $(this).parent().remove();
-//         });
-//          //ShoppingListApp.prototype.
-//         function resetValue() {
-//                 $('.list-input').val("");
-//             }
-
-//         function checkValue() {
-//                 if ($('.list-input').val() === "") {
-//                 alert('Please Type an Item ');
-//                 } else {
-//                 $('.list').append('<li class="item">' + $('.list-input').val()+'<i id="done" class="fa fa-check" aria-hidden="true"></i>' +'<i id="delete" class="fa fa-trash-o" aria-hidden="true"></i>');
-//                 resetValue();
-//                 }
-            
-//             // var app = new ShoppingListApp();
-//             //ShoppingListApp();
-//         function addItem(){
-//             var item = {'.item':item};
-//             var ajax = $.ajax('/items', {
-//                 type:'post',
-//                 data:JSON.stringify(item),
-//                 dataType:'json',
-//                 currentType:'application/json'
-//             });
-//             ajax.done(this.getItems.bind(this));
-//         };
-// }
-
-$(document).ready(function() {
-    $('.header').hide();
-    $('.header').delay(500).fadeIn();
-     var app = new TodoList();
+View.prototype.append = function(data) {
+    $('.list-todo').keyup(function(event) {
+  if (event.keyCode == 13) {
+    checkValue();
+    console.log('shits');
+  }
 });
+    $('.add').click(function() {
+      checkValue();
+});
+    $('.todo-items').on('click', 'li', function() {
+  $(this).css('text-decoration', 'line-through');
+});
+$('.todo-items').on('click', '#delete', function() {
+  $(this).parent().remove();
+});
+};
 
+function checkValue() {
+  if ($('.list-todo').val() === "") {
+    alert('Please Type an Item ');
+  } else {
+    $('.todo-items').append('<li class="item">' + $('.list-todo').val() + '<i id="done" class="fa fa-check" aria-hidden="true"></i>' +'<i id="delete" class="fa fa-trash-o" aria-hidden="true"></i>');
+    resetValue();
+  }
+}
+function resetValue() {
+  $('.list-todo').val("");
+}
 
+View.prototype.value = function() {
+    return $(".list-todo").val();
+};
 
+function Controller(view, model) {
+    this.view = view;
+    this.model = model;
+}
 
+var model = new Model();
+var view = new View();
+var controller = new Controller(view, model);
 
+view.append();
