@@ -77,12 +77,12 @@ storage.add('Broad beans');
 console.log(storage);
 
 //app get
-app.get('/users/todoapp/items', function(req, res) {
+app.get('/items', function(req, res) {
     res.json(storage.items);
 });
 
 //app post is to add to items
-app.post('/users/todoapp/items', jsonParser, function(req, res) {
+app.post('/items', jsonParser, function(req, res) {
 
     if (req.body) {
         var item = storage.add(req.body.name);
@@ -93,7 +93,7 @@ app.post('/users/todoapp/items', jsonParser, function(req, res) {
 });
 
 //to edit items 
-app.put('/users/todoapp/items/:id', function(req, res) {
+app.put('/items/:id', function(req, res) {
     var id = parseInt(req.params.id);
     var name = req.body.name;
     for (var i = 0; i < storage.items.length; i++) {
@@ -105,7 +105,7 @@ app.put('/users/todoapp/items/:id', function(req, res) {
 });
 
 //to delete items.
-app.delete('/users/todoapp/items/:id', function(req, res) {
+app.delete('/items/:id', function(req, res) {
     var id = parseInt(req.params.id);
     for (var i = 0; i < storage.items.length; i++) {
         if (storage.items[i].id === id) {

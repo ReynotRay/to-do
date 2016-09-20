@@ -191,3 +191,12 @@ label {
     color: transparent;
 }
 
+
+#delete {
+    cursor: pointer;
+    float: right;
+    margin-top: 3px;
+    width: 500px;
+    margin-right: 4px;
+   
+}
