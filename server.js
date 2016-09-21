@@ -73,7 +73,8 @@ Storage.prototype.add = function(name) {
 };
 
 var storage = new Storage();
-storage.add('Broad beans');
+storage.add('play baskebtall at 8pm');
+storage.add('dinner at 9');
 console.log(storage);
 
 //app get
