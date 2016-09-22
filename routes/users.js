@@ -29,7 +29,7 @@ router.get('/', function(req, res) {
 
 
 //register user
-    router.post('/register', function(req, res) {
+router.post('/register', function(req, res) {
     var name = req.body.name;
     var email = req.body.email;
     var username = req.body.username;
@@ -37,7 +37,7 @@ router.get('/', function(req, res) {
     var password2 = req.body.password2;
     console.log(name);
 
-//validation
+    //validation
     req.checkBody('name', 'Name is required').notEmpty();
     req.checkBody('email', 'Email is required').notEmpty();
     req.checkBody('email', 'Email is not valid').isEmail();
@@ -68,52 +68,25 @@ router.get('/', function(req, res) {
         res.redirect('/users/login');
     }
 });
-passport.use(new LocalStrategy(
-    function(username, password, done) {
-        User.getUserByUsername(username, function(err, user) {
-            if (err) throw err;
-            if (!user) {
-                return done(null, false, { message: 'Unknown User' });
-            }
 
-            User.comparePassword(password, user.password, function(err, isMatch) {
-                if (err) throw err;
-                if (isMatch) {
-                    return done(null, user);
-                } else {
-                    return done(null, false, { message: 'Invalid password' });
-                }
-            });
-        });
-    }));
-
-passport.serializeUser(function (user, done) {
-  done(null, user.id);
-});
-
-passport.deserializeUser(function (id, done) {
-  User.getUserById(id, function (err, user) {
-    done(err, user);
-  });
-});
 
 //after router.post it will run passport.authenticate and then if there is successRedirect
 router.post('/login',
-    passport.authenticate('local', { 
-        successRedirect: '/users/todoapp', 
-        failureRedirect: '/users/login', 
+    passport.authenticate('local', {
+        successRedirect: '/users/todoapp',
+        failureRedirect: '/users/login',
         //failureFlash: true 
     }),
     function(req, res) {
         res.redirect('/users/dasboard');
     });
 
-router.get('/logout', function (req, res) {
-  req.logout();
-  console.log('you logged out');
+router.get('/logout', function(req, res) {
+    req.logout();
+    console.log('you logged out');
 
-  //req.flash('success_msg', 'You are logged out');
-  res.redirect('/users/login');
+    //req.flash('success_msg', 'You are logged out');
+    res.redirect('/users/login');
 });
 
 

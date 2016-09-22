@@ -13,26 +13,6 @@
     <div class="container-layout">
         <nav id="todo">
             TO-DO <img id="checkmark" src="/images/checkmark.png">
-            <ul class="header">
-                <li style="list-style: none">{{#if user}}</li>
-                <li role="presentation">
-                    <a href="/users/logout">Logout</a>
-                </li>
-                <li style="list-style: none">{{else}}</li>
-                <li role="presentation">
-                    <a href="/">Home</a>
-                </li>
-                <li role="presentation">
-                    <a href="/users/register">Register</a>
-                </li>
-                <li role="presentation">
-                    <a href="/users/login">Login</a>
-                </li>
-                <li role="presentation">
-                    <a href="/users/logout">Logout</a>
-                </li>
-                <li style="list-style: none">{{/if}}</li>
-            </ul>
         </nav>
         <div class="video-wrapper">
             <video autoplay="" id="video" loop="" src=
@@ -42,7 +22,7 @@
             {{{body}}}
         </div>
         <footer class="footer"></footer>
-    </div><!-- /container-layout ends -->
+    </div>
     <script src=
     "https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.3.0/handlebars.js">
     </script> 
