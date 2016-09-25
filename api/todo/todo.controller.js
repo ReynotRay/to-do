@@ -15,13 +15,15 @@ var Controller = {
     },
 
     addItem: function(req, res, next) {
-
+        console.log('user', req.user);
         Todo.create({
-            user_id: req.user.id,
+            user_id: req.user._id,
             todo: req.body.todo
         }, function(err) {
             if (err) {
                 next(err);
+            } else {
+                res.status(201).end();
             }
         });
 

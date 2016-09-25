@@ -10,7 +10,7 @@ TodoList.prototype.addData = function(event) {
     var $value = this.input.val();
 
     if ($value) {
-        console.log($value);
+        this.addItem($value);
         this.list.append('<li class="item">' +
             '<i id="delete" class="fa fa-square-o" aria-hidden="true"></i>' +
             $value +
@@ -21,14 +21,15 @@ TodoList.prototype.addData = function(event) {
 
     }
 
-    TodoList.resetValue(this.input);
-    TodoList.deleteItem();
+    this.resetValue(this.input);
+    this.deleteItem();
 };
 
 TodoList.prototype.onKeydown = function() {
+    var that = this;
     this.input.keyup(function(event) {
         if (event.keyCode == 13) {
-            TodoList.addData();
+            that.addData();
         }
     });
 };
@@ -48,11 +49,11 @@ TodoList.prototype.markImportant = function() {
 };
 TodoList.prototype.getItems = function() {
     var that = this;
-    $.ajax('/items').done(function(items) {
+    $.ajax('/todos').done(function(items) {
         for (var i = 0; i < items.length; i++) {
             that.list.append('<li class="item">' +
                 '<i id="delete" class="fa fa-square-o" aria-hidden="true"></i>' +
-                items[i].name +
+                items[i].todo +
                 '<i id="done" class="fa fa-star-o" aria-hidden="false"></i>'
             );
         }
@@ -63,20 +64,19 @@ TodoList.prototype.getItems = function() {
 TodoList.prototype.addItem = function(name) {
 
     var item = {
-        '.item': name
+        'todo': name
     };
-    var ajax = $.ajax('/items', {
+    var ajax = $.ajax('/todos', {
         type: 'POST',
         data: JSON.stringify(item),
         dataType: 'json',
         contentType: 'application/json'
     });
 
-    ajax.done(this.listitems.bind(this));
 };
 
 
-var TodoList = new TodoList();
-TodoList.onKeydown();
-TodoList.getItems();
-TodoList.deleteItem();
+var todoList = new TodoList();
+todoList.onKeydown();
+todoList.getItems();
+todoList.deleteItem();

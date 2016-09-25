@@ -1,32 +1,37 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-var jsonParser = bodyParser.json();
-var cookieParser = require('cookie-parser');
+var session = require('express-session');
 var path = require('path');
 var exphbs = require('express-handlebars');
-var flash = require('connect-flash');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var User = require('../api/user/user.model');
+var expressValidator = require('express-validator');
 
 module.exports = function(app) {
-
-    app.use(express.static(path.join(__dirname, '../', 'public')));
 
     app.set('views', path.join(__dirname, '../', 'views'));
     app.engine('handlebars', exphbs({
         defaultLayout: 'layout'
     }));
+
     app.set('view engine', 'handlebars');
 
-    app.use(passport.initialize());
-    app.use(passport.session());
-
+    app.use(express.static(path.join(__dirname, '../', 'public')));
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({
         extended: false
     }));
-    app.use(cookieParser());
+    app.use(session({
+        secret: 'keyboard cat',
+        resave: 'false',
+        saveUninitialized: 'false'
+    }));
+
+    app.use(passport.initialize());
+    app.use(passport.session());
+
+    app.use(expressValidator());
 
     passport.use(new LocalStrategy(
         function(username, password, done) {
@@ -38,7 +43,7 @@ module.exports = function(app) {
                     });
                 }
 
-                User.comparePassword(password, user.password, function(err, isMatch) {
+                user.comparePassword(password, user.password, function(err, isMatch) {
                     if (err) throw err;
                     if (isMatch) {
                         return done(null, user);
